@@ -1,0 +1,29 @@
+{
+  "name": "openwebui-tools",
+  "description": "Custom tools for document ingestion, knowledge management, infra diagnostics, and memory.",
+  "type": "openapi",
+  "base_url": "http://openwebui-tools:9099",
+  "openapi_url": "http://openwebui-tools:9099/openapi.json",
+  "auth": {
+    "type": "none"
+  },
+  "recommended_tools": [
+    "ingest_document",
+    "extract_information",
+    "save_knowledge",
+    "search_knowledge",
+    "list_knowledge",
+    "delete_knowledge",
+    "system_health",
+    "gpu_status",
+    "docker_ps",
+    "docker_logs",
+    "ollama_models",
+    "ollama_running",
+    "litellm_health",
+    "openwebui_health",
+    "save_fact",
+    "get_fact",
+    "search_facts"
+  ]
+}

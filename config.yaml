@@ -1,0 +1,120 @@
+model_list:
+ 
+  - model_name: thinker-pro
+    litellm_params:
+      model: ollama/qwen3:14b
+      api_base: os.environ/OLLAMA_BASE_URL
+      temperature: 0
+      think: false
+      allowed_openai_params:
+        - tools
+        - tool_choice
+        - parallel_tool_calls
+        - response_format
+    model_info:
+      supports_function_calling: true
+
+  - model_name: Vision
+    litellm_params:
+      model: ollama/gemma3:4b
+      api_base: os.environ/OLLAMA_BASE_URL
+
+  - model_name: vision-fallback
+    litellm_params:
+      model: ollama/llava
+      api_base: os.environ/OLLAMA_BASE_URL
+
+  - model_name: coder-pro
+    litellm_params:
+      model: ollama/qwen3:14b
+      api_base: os.environ/OLLAMA_BASE_URL
+      temperature: 0
+      think: false
+      allowed_openai_params:
+        - tools
+        - tool_choice
+        - parallel_tool_calls
+        - response_format
+    model_info:
+      supports_function_calling: true
+
+  - model_name: coder-fast
+    litellm_params:
+      model: ollama/qwen3:14b
+      api_base: os.environ/OLLAMA_BASE_URL
+      temperature: 0
+      think: false
+      allowed_openai_params:
+        - tools
+        - tool_choice
+        - parallel_tool_calls
+        - response_format
+    model_info:
+      supports_function_calling: true
+
+  - model_name: litellm-act
+    litellm_params:
+      model: ollama/qwen3:14b
+      api_base: os.environ/OLLAMA_BASE_URL
+      temperature: 0
+      think: false
+      allowed_openai_params:
+        - tools
+        - tool_choice
+        - parallel_tool_calls
+        - response_format
+    model_info:
+      supports_function_calling: true
+
+  - model_name: coder-max
+    litellm_params:
+      model: ollama/qwen3:14b
+      api_base: os.environ/OLLAMA_BASE_URL
+      temperature: 0
+      think: false
+      allowed_openai_params:
+        - tools
+        - tool_choice
+        - parallel_tool_calls
+        - response_format
+    model_info:
+      supports_function_calling: true
+
+  - model_name: embed-model
+    litellm_params:
+      model: ollama/mxbai-embed-large:latest
+      api_base: os.environ/OLLAMA_BASE_URL
+
+  - model_name: embed-model-fallback
+    litellm_params:
+      model: ollama/nomic-embed-text:latest
+      api_base: os.environ/OLLAMA_BASE_URL
+
+  - model_name: jarvis
+    litellm_params:
+      model: auto_router/complexity_router
+      complexity_router_config:
+        tiers:
+          SIMPLE: coder-fast
+          MEDIUM: thinker-pro
+          COMPLEX: thinker-pro
+          REASONING: thinker-pro
+      complexity_router_default_model: thinker-pro
+      allowed_openai_params:
+        - tools
+        - tool_choice
+        - parallel_tool_calls
+        - response_format
+    model_info:
+      supports_function_calling: true
+
+router_settings:
+  routing_strategy: simple-shuffle
+  num_retries: 2
+  fallbacks:
+    - {"Vision": ["vision-fallback"]}
+    - {"embed-model": ["embed-model-fallback"]}
+
+general_settings:
+  allow_fallbacks: true
+  drop_params: true
