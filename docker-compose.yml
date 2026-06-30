@@ -185,13 +185,17 @@ services:
       OLLAMA_CONTEXT_LENGTH: "32768"
       OLLAMA_FLASH_ATTENTION: "1"
       OLLAMA_MAX_LOADED_MODELS: "1"
-      OLLAMA_LOAD_TIMEOUT: "20m"
+      OLLAMA_LOAD_TIMEOUT: "120m"
+      OLLAMA_LLM_LIBRARY: cuda
+      OLLAMA_DEBUG: "0"
     profiles:
       - local-models
     ports:
       - "11434:11434"
     volumes:
       - ollama-data:/root/.ollama
+      - /usr/local/cuda/lib64:/usr/local/cuda/lib64:ro
+      - /usr/lib/nvidia-compute:/usr/lib/nvidia-compute:ro
     networks:
       - ai-private
     healthcheck:
